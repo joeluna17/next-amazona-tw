@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { Store } from '../../utils/store'
 
 export default function ProductScreen() {
+  const router = useRouter()
   const { state, dispatch } = useContext(Store)
   const { query } = useRouter()
   const { slug } = query
@@ -19,8 +20,8 @@ export default function ProductScreen() {
       alert('Sorry, Product is out of stock')
       return
     }
-
     dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity: updatedQuantity } })
+    router.push('/cart')
   }
 
   if (!product) {
